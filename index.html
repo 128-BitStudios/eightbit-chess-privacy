@@ -13,15 +13,16 @@
             margin: 0 auto;
             padding: 20px;
             color: #ffffff;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: #0F0F1A;
             min-height: 100vh;
         }
         .container {
-            background: rgba(42, 42, 42, 0.95);
+            background: rgba(42, 42, 58, 0.7);
             padding: 40px;
             border-radius: 20px;
-            border: 2px solid #3a3a3a;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            border: 2px solid #3a3a4a;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             text-align: center;
         }
         .header {
@@ -31,15 +32,16 @@
             color: #FFD700;
             font-size: 20px;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 0px #333;
+            text-shadow: 0 0 10px #FFD700, 2px 2px 0px #333;
         }
         .subtitle {
-            color: #00ff00;
+            color: #ff006e;
             font-size: 10px;
             margin-bottom: 20px;
+            text-shadow: 0 0 5px #ff006e;
         }
         .tagline {
-            color: #00ffff;
+            color: #aaaaaa;
             font-size: 8px;
             margin-bottom: 30px;
         }
@@ -51,28 +53,29 @@
             margin: 40px 0;
         }
         .link-card {
-            background: rgba(58, 58, 58, 0.8);
+            background: rgba(42, 42, 58, 0.6);
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 20px;
             text-decoration: none;
             color: #ffffff;
-            border: 2px solid #555;
+            border: 2px solid #3a3a4a;
+            backdrop-filter: blur(15px);
             transition: all 0.3s ease;
             min-width: 220px;
             position: relative;
             overflow: hidden;
         }
         .link-card:hover {
-            border-color: #00ff00;
+            border-color: #00ffff;
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,255,0,0.2);
-            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0,255,255,0.3);
+            background: rgba(0, 255, 255, 0.1);
         }
         .link-card h3 {
             margin: 0 0 15px 0;
-            color: #00ff00;
+            color: #00ffff;
             font-size: 12px;
-            text-shadow: 1px 1px 0px #333;
+            text-shadow: 0 0 8px #00ffff;
         }
         .link-card p {
             margin: 0;
@@ -87,16 +90,18 @@
             padding: 20px;
             background: rgba(0, 255, 0, 0.1);
             border: 1px solid #00ff00;
-            border-radius: 10px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
         .stat-item {
             text-align: center;
         }
         .stat-number {
-            color: #FFD700;
+            color: #00ff00;
             font-size: 14px;
             display: block;
             margin-bottom: 5px;
+            text-shadow: 0 0 10px #00ff00;
         }
         .stat-label {
             color: #cccccc;
@@ -122,20 +127,6 @@
             <div class="tagline">Retro Chess Tactics Training</div>
         </div>
 
-        <div class="stats">
-            <div class="stat-item">
-                <span class="stat-number">100+</span>
-                <div class="stat-label">THEMES</div>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">1000+</span>
-                <div class="stat-label">PUZZLES</div>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">∞</span>
-                <div class="stat-label">TACTICS</div>
-            </div>
-        </div>
         
         <div class="links">
             <a href="support.html" class="link-card">

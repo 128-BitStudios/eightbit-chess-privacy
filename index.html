@@ -4,93 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>8bit Chess Puzzles - App Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8;
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
         }
         .container {
-            background: white;
+            background: rgba(42, 42, 42, 0.95);
             padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 20px;
+            border: 2px solid #3a3a3a;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             text-align: center;
         }
-        h1 {
-            color: #2c3e50;
+        .header {
+            margin-bottom: 40px;
+        }
+        .title {
+            color: #FFD700;
+            font-size: 20px;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #333;
         }
         .subtitle {
-            color: #7f8c8d;
-            font-size: 18px;
+            color: #00ff00;
+            font-size: 10px;
+            margin-bottom: 20px;
+        }
+        .tagline {
+            color: #00ffff;
+            font-size: 8px;
             margin-bottom: 30px;
         }
         .links {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
             flex-wrap: wrap;
-            margin: 30px 0;
+            margin: 40px 0;
         }
         .link-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
+            background: rgba(58, 58, 58, 0.8);
+            padding: 25px;
+            border-radius: 15px;
             text-decoration: none;
-            color: #2c3e50;
-            border: 2px solid #e9ecef;
+            color: #ffffff;
+            border: 2px solid #555;
             transition: all 0.3s ease;
-            min-width: 200px;
+            min-width: 220px;
+            position: relative;
+            overflow: hidden;
         }
         .link-card:hover {
-            border-color: #3498db;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #00ff00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,255,0,0.2);
+            background: rgba(0, 255, 0, 0.1);
         }
         .link-card h3 {
-            margin: 0 0 10px 0;
-            color: #3498db;
+            margin: 0 0 15px 0;
+            color: #00ff00;
+            font-size: 12px;
+            text-shadow: 1px 1px 0px #333;
         }
         .link-card p {
             margin: 0;
+            font-size: 7px;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            border-radius: 10px;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            color: #FFD700;
             font-size: 14px;
-            color: #6c757d;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            color: #cccccc;
+            font-size: 6px;
         }
         .footer {
             margin-top: 40px;
             padding-top: 20px;
-            border-top: 1px solid #e9ecef;
-            color: #6c757d;
+            border-top: 1px solid #555;
+            color: #888;
+            font-size: 7px;
+        }
+        .footer p {
+            margin: 5px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🏛️ 8bit Chess Puzzles</h1>
-        <p class="subtitle">Retro Chess Puzzles & Tactics Training</p>
+        <div class="header">
+            <h1 class="title">8BIT CHESS</h1>
+            <div class="subtitle">PUZZLES</div>
+            <div class="tagline">Retro Chess Tactics Training</div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number">100+</span>
+                <div class="stat-label">THEMES</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">1000+</span>
+                <div class="stat-label">PUZZLES</div>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">∞</span>
+                <div class="stat-label">TACTICS</div>
+            </div>
+        </div>
         
         <div class="links">
             <a href="support.html" class="link-card">
-                <h3>📧 Support</h3>
-                <p>Get help, report bugs, or contact us</p>
+                <h3>SUPPORT CENTER</h3>
+                <p>Get help, report bugs, FAQs, and contact information for 8bit Chess Puzzles</p>
             </a>
             
             <a href="privacy-policy.html" class="link-card">
-                <h3>🔒 Privacy Policy</h3>
-                <p>How we protect and use your data</p>
+                <h3>PRIVACY POLICY</h3>
+                <p>How we protect and use your data. GDPR compliant privacy information</p>
             </a>
         </div>
 
         <div class="footer">
             <p><strong>Developer:</strong> 128 Bit Studios</p>
-            <p><strong>Email:</strong> 128bit.studios@gmail.com</p>
-            <p><strong>Available on:</strong> iOS App Store</p>
+            <p><strong>Contact:</strong> 128bit.studios@gmail.com</p>
+            <p><strong>Platform:</strong> iOS App Store</p>
+            <p><strong>© 2024 128 Bit Studios</strong></p>
         </div>
     </div>
 </body>

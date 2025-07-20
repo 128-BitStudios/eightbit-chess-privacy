@@ -213,8 +213,8 @@
             left: 100%;
         }
 
-        /* Right side - Screenshots Grid */
-        .hero-gallery {
+        /* Right side - Carousel */
+        .hero-carousel {
             flex: 1;
             display: flex;
             justify-content: center;
@@ -222,56 +222,106 @@
             min-height: 80vh;
         }
 
-        .gallery-container {
+        .carousel-container {
+            position: relative;
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
+            height: 720px;
         }
 
-        .featured-video {
+        .carousel-wrapper {
+            position: relative;
             width: 100%;
-            margin-bottom: 20px;
-            border-radius: 20px;
+            height: 100%;
             overflow: hidden;
+            border-radius: 30px;
             box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(139, 92, 246, 0.3);
+                0 25px 80px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(139, 92, 246, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
-        .featured-video video {
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 20px;
-        }
-
-        .screenshots-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .screenshot-item {
-            border-radius: 15px;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            border-radius: 30px;
             overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.4),
-                0 0 0 1px rgba(139, 92, 246, 0.2);
         }
 
-        .screenshot-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.6),
-                0 0 0 1px rgba(139, 92, 246, 0.5),
-                0 0 20px rgba(139, 92, 246, 0.3);
+        .carousel-slide.active {
+            opacity: 1;
         }
 
-        .screenshot-item img {
+        .carousel-slide img,
+        .carousel-slide video {
             width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 15px;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 30px;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(139, 92, 246, 0.9);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 18px;
+            border-radius: 50%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .carousel-nav:hover {
+            background: rgba(139, 92, 246, 1);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+            left: -80px;
+        }
+
+        .carousel-next {
+            right: -80px;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .indicator {
+            width: 40px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+        }
+
+        .indicator.active {
+            background: #8B5CF6;
+            box-shadow: 0 0 15px #8B5CF6;
+            transform: scale(1.2);
         }
 
         /* Stats section */
@@ -372,53 +422,178 @@
         @media (max-width: 1200px) {
             .hero {
                 flex-direction: column;
-                padding: 140px 40px 60px;
-                gap: 60px;
+                padding: 120px 30px 60px;
+                gap: 50px;
                 text-align: center;
             }
 
-            .gallery-container {
-                max-width: 400px;
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .carousel-container {
+                max-width: 350px;
+                height: 650px;
+            }
+
+            .carousel-prev {
+                left: -60px;
+            }
+
+            .carousel-next {
+                right: -60px;
             }
         }
 
         @media (max-width: 768px) {
             .header {
-                top: 20px;
-                left: 20px;
+                top: 15px;
+                left: 15px;
             }
 
             .header-logo {
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
             }
 
             .hero {
-                padding: 100px 20px 40px;
-                gap: 40px;
+                padding: 80px 15px 30px;
+                gap: 30px;
             }
 
-            .gallery-container {
-                max-width: 350px;
+            .title {
+                font-size: clamp(20px, 6vw, 32px);
+                margin-bottom: 16px;
             }
 
-            .screenshots-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
+            .subtitle {
+                font-size: clamp(12px, 4vw, 18px);
+                margin-bottom: 16px;
             }
 
-            .stats, .footer {
-                padding: 40px 20px;
+            .tagline {
+                font-size: clamp(10px, 3vw, 14px);
+                margin-bottom: 25px;
+            }
+
+            .features-list {
+                margin-bottom: 30px;
+            }
+
+            .feature-item {
+                font-size: clamp(8px, 2.5vw, 11px);
+                margin-bottom: 8px;
+                gap: 8px;
+            }
+
+            .download-btn {
+                padding: 18px 36px;
+                font-size: clamp(9px, 2.5vw, 12px);
+            }
+
+            .carousel-container {
+                max-width: 300px;
+                height: 550px;
+            }
+
+            .carousel-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 14px;
+            }
+
+            .carousel-prev {
+                left: -55px;
+            }
+
+            .carousel-next {
+                right: -55px;
+            }
+
+            .stats {
+                padding: 50px 15px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                max-width: 100%;
+            }
+
+            .stat-item {
+                padding: 20px 15px;
+            }
+
+            .stat-number {
+                font-size: clamp(16px, 5vw, 24px);
+                margin-bottom: 8px;
+            }
+
+            .stat-label {
+                font-size: clamp(7px, 2vw, 9px);
+            }
+
+            .footer {
+                padding: 40px 15px;
             }
 
             .footer-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 20px;
+            }
+
+            .footer-links {
+                gap: 20px;
+            }
+
+            .footer-link {
+                font-size: clamp(8px, 2.5vw, 10px);
+                padding: 10px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 70px 10px 20px;
+                gap: 25px;
+            }
+
+            .title {
+                font-size: clamp(18px, 7vw, 28px);
+            }
+
+            .subtitle {
+                font-size: clamp(11px, 4.5vw, 16px);
+            }
+
+            .carousel-container {
+                max-width: 280px;
+                height: 500px;
+            }
+
+            .carousel-prev, .carousel-next {
+                width: 45px;
+                height: 45px;
+                font-size: 12px;
+            }
+
+            .carousel-prev {
+                left: -50px;
+            }
+
+            .carousel-next {
+                right: -50px;
             }
 
             .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 30px;
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
             }
         }
     </style>
@@ -470,34 +645,37 @@
             <a href="https://apps.apple.com/us/app/8bit-chess/id6747295431" class="download-btn">Download Free</a>
         </div>
 
-        <div class="hero-gallery">
-            <div class="gallery-container">
-                <div class="featured-video">
-                    <video autoplay loop muted playsinline>
-                        <source src="assets/Sequence 01_13.mp4" type="video/mp4">
-                    </video>
-                </div>
-                
-                <div class="screenshots-grid">
-                    <div class="screenshot-item">
+        <div class="hero-carousel">
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-slide active">
+                        <video autoplay loop muted playsinline>
+                            <source src="assets/Sequence 01_13.mp4" type="video/mp4">
+                            <img src="assets/1-IMG_4891.jpg" alt="Chess Puzzle Gameplay">
+                        </video>
+                    </div>
+                    <div class="carousel-slide">
                         <img src="assets/1-IMG_4891.jpg" alt="Chess Puzzle Gameplay">
                     </div>
-                    <div class="screenshot-item">
+                    <div class="carousel-slide">
                         <img src="assets/2-IMG_4889.jpg" alt="Tactical Training">
                     </div>
-                    <div class="screenshot-item">
+                    <div class="carousel-slide">
                         <img src="assets/3-IMG_4887.jpg" alt="Strategic Challenges">
                     </div>
-                    <div class="screenshot-item">
+                    <div class="carousel-slide">
                         <img src="assets/4-IMG_4888.jpg" alt="Chess Puzzles">
                     </div>
-                    <div class="screenshot-item">
+                    <div class="carousel-slide">
                         <img src="assets/5-IMG_4881.jpg" alt="Checkmate Scenarios">
                     </div>
-                    <div class="screenshot-item">
+                    <div class="carousel-slide">
                         <img src="assets/6-IMG_4885.jpg" alt="Chess Training">
                     </div>
                 </div>
+                <button class="carousel-nav carousel-prev">‹</button>
+                <button class="carousel-nav carousel-next">›</button>
+                <div class="carousel-indicators" id="indicators"></div>
             </div>
         </div>
     </section>
@@ -538,6 +716,123 @@
     </footer>
 
     <script>
+        // Carousel functionality with speed fix
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        let autoSlideInterval = null;
+        const SLIDE_DURATION = 5000; // Fixed 5 second interval
+
+        // Create indicators
+        const indicatorsContainer = document.getElementById('indicators');
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('button');
+            indicator.className = 'indicator';
+            if (i === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(i));
+            indicatorsContainer.appendChild(indicator);
+        }
+
+        function showSlide(index) {
+            // Remove active class from all slides and indicators
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelectorAll('.indicator').forEach(indicator => indicator.classList.remove('active'));
+            
+            // Add active class to current slide and indicator
+            slides[index].classList.add('active');
+            document.querySelectorAll('.indicator')[index].classList.add('active');
+            
+            // Handle video
+            const video = slides[index].querySelector('video');
+            if (video) {
+                video.currentTime = 0;
+                video.play().catch(() => console.log('Video autoplay blocked'));
+            }
+            
+            // Pause other videos
+            slides.forEach((slide, i) => {
+                if (i !== index) {
+                    const otherVideo = slide.querySelector('video');
+                    if (otherVideo) otherVideo.pause();
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+            showSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            // Clear any existing interval first
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+            }
+            // Set new interval with fixed duration
+            autoSlideInterval = setInterval(nextSlide, SLIDE_DURATION);
+        }
+
+        function stopAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = null;
+            }
+        }
+
+        function resetAutoSlide() {
+            stopAutoSlide();
+            // Wait 8 seconds before restarting auto-slide
+            setTimeout(() => {
+                if (!autoSlideInterval) { // Only start if not already running
+                    startAutoSlide();
+                }
+            }, 8000);
+        }
+
+        // Event listeners
+        document.querySelector('.carousel-prev').addEventListener('click', () => {
+            prevSlide();
+            resetAutoSlide();
+        });
+
+        document.querySelector('.carousel-next').addEventListener('click', () => {
+            nextSlide();
+            resetAutoSlide();
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.querySelector('.carousel-wrapper').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoSlide();
+        });
+
+        document.querySelector('.carousel-wrapper').addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const swipeThreshold = 50;
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide();
+            }
+            
+            resetAutoSlide();
+        });
+
         // Create floating pixels
         function createFloatingPixels() {
             const container = document.getElementById('floatingPixels');
@@ -552,7 +847,17 @@
         }
 
         // Initialize
+        startAutoSlide();
         createFloatingPixels();
+
+        // Pause when page is hidden
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoSlide();
+            } else if (!autoSlideInterval) {
+                startAutoSlide();
+            }
+        });
     </script>
 </body>
 </html>

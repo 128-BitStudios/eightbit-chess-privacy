@@ -165,7 +165,8 @@
             align-items: center;
         }
 
-        .carousel-item img {
+        .carousel-item img,
+        .carousel-item video {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -430,6 +431,12 @@
             <div class="carousel-container">
                 <div class="carousel" id="carousel">
                     <div class="carousel-item">
+                        <video autoplay muted loop playsinline>
+                            <source src="assets/Sequence 01_13.mp4" type="video/mp4">
+                            <img src="assets/1-IMG_4891.jpg" alt="Chess Puzzle Gameplay">
+                        </video>
+                    </div>
+                    <div class="carousel-item">
                         <img src="assets/1-IMG_4891.jpg" alt="Chess Puzzle Gameplay">
                     </div>
                     <div class="carousel-item">
@@ -492,7 +499,7 @@
 
     <script>
         let currentSlide = 0;
-        const totalSlides = 6;
+        const totalSlides = 7;
         const carousel = document.getElementById('carousel');
         const indicatorsContainer = document.getElementById('indicators');
 
@@ -512,6 +519,18 @@
             document.querySelectorAll('.indicator').forEach((ind, index) => {
                 ind.classList.toggle('active', index === currentSlide);
             });
+
+            // Handle video autoplay for the first slide
+            const videos = carousel.querySelectorAll('video');
+            videos.forEach((video, index) => {
+                if (index === currentSlide) {
+                    video.play().catch(() => {
+                        // Autoplay might be blocked, that's ok
+                    });
+                } else {
+                    video.pause();
+                }
+            });
         }
 
         function changeSlide(direction) {
@@ -526,10 +545,13 @@
             updateCarousel();
         }
 
+        // Initialize carousel
+        updateCarousel();
+
         // Auto-rotate carousel
         setInterval(() => {
             changeSlide(1);
-        }, 4000);
+        }, 5000);
 
         // Touch support for mobile
         let touchStartX = 0;

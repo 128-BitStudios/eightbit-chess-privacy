@@ -14,31 +14,85 @@
 
         body {
             font-family: 'Press Start 2P', cursive;
-            background-color: #141516;
+            background-color: #000000;
             color: #ffffff;
             overflow-x: hidden;
             line-height: 1.8;
+            position: relative;
+        }
+
+        /* Animated 8-bit Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(45deg, transparent 40%, rgba(139, 92, 246, 0.03) 41%, rgba(139, 92, 246, 0.03) 42%, transparent 43%),
+                linear-gradient(-45deg, transparent 40%, rgba(255, 0, 110, 0.03) 41%, rgba(255, 0, 110, 0.03) 42%, transparent 43%),
+                linear-gradient(90deg, transparent 48%, rgba(0, 255, 255, 0.02) 49%, rgba(0, 255, 255, 0.02) 51%, transparent 52%);
+            background-size: 20px 20px, 20px 20px, 40px 40px;
+            animation: pixelMove 20s linear infinite;
+        }
+
+        @keyframes pixelMove {
+            0% { background-position: 0 0, 0 0, 0 0; }
+            100% { background-position: 20px 20px, -20px 20px, 40px 0; }
+        }
+
+        /* Floating pixels */
+        .floating-pixels {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .pixel {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #8B5CF6;
+            opacity: 0.6;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .pixel:nth-child(2n) { background: #ff006e; animation-delay: -2s; }
+        .pixel:nth-child(3n) { background: #00ffff; animation-delay: -4s; }
+        .pixel:nth-child(4n) { background: #FFD700; animation-delay: -6s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
         /* Header with logo */
         .header {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 30px;
+            left: 30px;
             z-index: 100;
         }
 
         .header-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4);
             transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
         }
 
         .header-logo:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(139, 92, 246, 0.5);
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.6);
         }
 
         /* Hero Section - Split Layout */
@@ -46,76 +100,102 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 80px 40px 40px;
-            gap: 60px;
+            padding: 120px 60px 60px;
+            gap: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         /* Left side - Content */
         .hero-content {
             flex: 1;
-            max-width: 600px;
-            padding-right: 20px;
+            max-width: 650px;
         }
 
         .title {
-            font-size: clamp(32px, 4.5vw, 56px);
+            font-size: clamp(28px, 4vw, 64px);
             color: #FFD700;
-            text-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
-            margin-bottom: 20px;
+            text-shadow: 
+                0 0 5px rgba(255, 215, 0, 0.5),
+                0 0 10px rgba(255, 215, 0, 0.3),
+                0 0 20px rgba(255, 215, 0, 0.2);
+            margin-bottom: 24px;
             line-height: 1.2;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5), 0 0 10px rgba(255, 215, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.2); }
+            100% { text-shadow: 0 0 8px rgba(255, 215, 0, 0.7), 0 0 15px rgba(255, 215, 0, 0.5), 0 0 25px rgba(255, 215, 0, 0.3); }
         }
 
         .subtitle {
-            font-size: clamp(16px, 2.5vw, 24px);
+            font-size: clamp(14px, 2.2vw, 28px);
             color: #ff006e;
-            text-shadow: 0 0 6px rgba(255, 0, 110, 0.2);
-            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(255, 0, 110, 0.4);
+            margin-bottom: 24px;
+            animation: subtitlePulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes subtitlePulse {
+            0% { opacity: 0.8; }
+            100% { opacity: 1; }
         }
 
         .tagline {
-            font-size: clamp(12px, 1.8vw, 16px);
+            font-size: clamp(10px, 1.5vw, 18px);
             color: #00ffff;
-            text-shadow: 0 0 4px rgba(0, 255, 255, 0.2);
+            text-shadow: 0 0 6px rgba(0, 255, 255, 0.3);
             margin-bottom: 40px;
             line-height: 1.6;
         }
 
         .features-list {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
         .feature-item {
-            font-size: 10px;
+            font-size: clamp(8px, 1.2vw, 12px);
             color: #cccccc;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            padding: 8px 0;
         }
 
         .feature-icon {
             color: #8B5CF6;
-            font-size: 8px;
+            font-size: clamp(6px, 1vw, 10px);
+            animation: iconBlink 2s infinite;
+        }
+
+        @keyframes iconBlink {
+            0%, 90% { opacity: 1; }
+            95% { opacity: 0.3; }
         }
 
         .download-btn {
             display: inline-block;
-            padding: 20px 40px;
+            padding: 24px 48px;
             background: linear-gradient(45deg, #8B5CF6, #EC4899);
             color: #ffffff;
             text-decoration: none;
-            font-size: 12px;
-            border-radius: 12px;
+            font-size: clamp(10px, 1.5vw, 14px);
+            border-radius: 15px;
             position: relative;
             overflow: hidden;
             transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(139, 92, 246, 0.4);
+            box-shadow: 
+                0 6px 25px rgba(139, 92, 246, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 40px rgba(139, 92, 246, 0.6);
         }
 
         .download-btn::before {
@@ -125,7 +205,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transition: left 0.5s;
         }
 
@@ -139,42 +219,51 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 70vh;
+            min-height: 80vh;
         }
 
         .carousel-container {
             position: relative;
             width: 100%;
-            max-width: 350px;
-            height: 750px;
+            max-width: 400px;
+            height: 720px;
+            perspective: 1000px;
         }
 
-        .carousel {
-            display: flex;
-            transition: transform 0.5s ease;
-            height: 100%;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
-        }
-
-        .carousel-item {
-            min-width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .carousel-item img,
-        .carousel-item video {
+        .carousel-wrapper {
+            position: relative;
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            border-radius: 25px;
+            overflow: hidden;
+            border-radius: 30px;
+            box-shadow: 
+                0 25px 80px rgba(0, 0, 0, 0.7),
+                0 0 0 1px rgba(139, 92, 246, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
-        .carousel-item video {
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img,
+        .carousel-slide video {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
+            border-radius: 30px;
         }
 
         .carousel-nav {
@@ -184,190 +273,212 @@
             background: rgba(139, 92, 246, 0.9);
             color: white;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             cursor: pointer;
             font-family: 'Press Start 2P', cursive;
-            font-size: 16px;
+            font-size: 18px;
             border-radius: 50%;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
         }
 
         .carousel-nav:hover {
             background: rgba(139, 92, 246, 1);
-            box-shadow: 0 0 20px rgba(139, 92, 246, 0.8);
+            box-shadow: 0 8px 30px rgba(139, 92, 246, 0.8);
             transform: translateY(-50%) scale(1.1);
         }
 
         .carousel-prev {
-            left: -70px;
+            left: -80px;
         }
 
         .carousel-next {
-            right: -70px;
+            right: -80px;
         }
 
         .carousel-indicators {
             position: absolute;
-            bottom: -40px;
+            bottom: -60px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .indicator {
-            width: 30px;
-            height: 6px;
+            width: 40px;
+            height: 8px;
             background: rgba(255, 255, 255, 0.3);
             border: none;
             cursor: pointer;
             transition: all 0.3s;
-            border-radius: 3px;
+            border-radius: 4px;
         }
 
         .indicator.active {
             background: #8B5CF6;
-            box-shadow: 0 0 10px #8B5CF6;
+            box-shadow: 0 0 15px #8B5CF6;
+            transform: scale(1.2);
         }
 
         /* Stats section */
         .stats {
-            padding: 60px 40px;
+            padding: 100px 60px;
             background: rgba(139, 92, 246, 0.05);
+            position: relative;
         }
 
         .stats-grid {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 50px;
             text-align: center;
         }
 
         .stat-item {
-            padding: 20px;
+            padding: 30px 20px;
+            background: rgba(42, 42, 58, 0.3);
+            border-radius: 20px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.5);
         }
 
         .stat-number {
-            font-size: 24px;
+            font-size: clamp(20px, 3vw, 32px);
             color: #00ffff;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            animation: statGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes statGlow {
+            0% { text-shadow: 0 0 15px rgba(0, 255, 255, 0.4); }
+            100% { text-shadow: 0 0 25px rgba(0, 255, 255, 0.6); }
         }
 
         .stat-label {
-            font-size: 8px;
+            font-size: clamp(8px, 1.2vw, 10px);
             color: #cccccc;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         /* Footer */
         .footer {
-            padding: 40px;
-            background: rgba(42, 42, 58, 0.4);
+            padding: 60px;
+            background: rgba(42, 42, 58, 0.3);
             border-top: 1px solid rgba(139, 92, 246, 0.2);
         }
 
         .footer-content {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 30px;
         }
 
         .footer-links {
             display: flex;
-            gap: 30px;
+            gap: 40px;
         }
 
         .footer-link {
             color: #00ffff;
             text-decoration: none;
-            font-size: 10px;
+            font-size: clamp(8px, 1.2vw, 12px);
             transition: all 0.3s;
-            padding: 8px 16px;
+            padding: 12px 20px;
             border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 6px;
+            border-radius: 8px;
         }
 
         .footer-link:hover {
             background: rgba(0, 255, 255, 0.1);
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
         }
 
         .footer-info {
-            font-size: 8px;
+            font-size: clamp(7px, 1vw, 9px);
             color: #888;
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
+        @media (max-width: 1200px) {
             .hero {
                 flex-direction: column;
-                padding: 100px 20px 40px;
-                gap: 40px;
+                padding: 140px 40px 60px;
+                gap: 60px;
                 text-align: center;
-            }
-
-            .hero-content {
-                padding-right: 0;
             }
 
             .carousel-container {
                 max-width: 350px;
-                height: 600px;
+                height: 650px;
             }
 
             .carousel-prev {
-                left: -50px;
+                left: -60px;
             }
 
             .carousel-next {
-                right: -50px;
+                right: -60px;
             }
         }
 
         @media (max-width: 768px) {
             .header {
-                top: 15px;
-                left: 15px;
+                top: 20px;
+                left: 20px;
             }
 
             .header-logo {
-                width: 50px;
-                height: 50px;
+                width: 60px;
+                height: 60px;
             }
 
             .hero {
-                padding: 80px 15px 30px;
+                padding: 100px 20px 40px;
+                gap: 40px;
             }
 
             .carousel-container {
-                max-width: 280px;
-                height: 500px;
+                max-width: 300px;
+                height: 550px;
             }
 
-            .carousel-prev, .carousel-next {
-                width: 40px;
-                height: 40px;
-                font-size: 12px;
+            .carousel-nav {
+                width: 50px;
+                height: 50px;
+                font-size: 14px;
             }
 
             .carousel-prev {
-                left: -45px;
+                left: -55px;
             }
 
             .carousel-next {
-                right: -45px;
+                right: -55px;
+            }
+
+            .stats, .footer {
+                padding: 40px 20px;
             }
 
             .footer-content {
@@ -377,17 +488,17 @@
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
+                gap: 30px;
             }
         }
 
         @media (max-width: 480px) {
             .carousel-prev, .carousel-next {
                 position: static;
-                margin: 10px;
+                margin: 15px;
             }
 
-            .carousel-nav-container {
+            .nav-buttons {
                 display: flex;
                 justify-content: center;
                 gap: 20px;
@@ -397,6 +508,10 @@
     </style>
 </head>
 <body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="floating-pixels" id="floatingPixels"></div>
+
     <!-- Header with logo -->
     <header class="header">
         <img src="assets/logo-1024.png" alt="8bit Chess" class="header-logo">
@@ -433,34 +548,34 @@
 
         <div class="hero-carousel">
             <div class="carousel-container">
-                <div class="carousel" id="carousel">
-                    <div class="carousel-item">
-                        <video autoplay loop playsinline>
+                <div class="carousel-wrapper">
+                    <div class="carousel-slide active">
+                        <video autoplay loop muted playsinline>
                             <source src="assets/Sequence 01_13.mp4" type="video/mp4">
                             <img src="assets/1-IMG_4891.jpg" alt="Chess Puzzle Gameplay">
                         </video>
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-slide">
                         <img src="assets/1-IMG_4891.jpg" alt="Chess Puzzle Gameplay">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-slide">
                         <img src="assets/2-IMG_4889.jpg" alt="Tactical Training">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-slide">
                         <img src="assets/3-IMG_4887.jpg" alt="Strategic Challenges">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-slide">
                         <img src="assets/4-IMG_4888.jpg" alt="Chess Puzzles">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-slide">
                         <img src="assets/5-IMG_4881.jpg" alt="Checkmate Scenarios">
                     </div>
-                    <div class="carousel-item">
+                    <div class="carousel-slide">
                         <img src="assets/6-IMG_4885.jpg" alt="Chess Training">
                     </div>
                 </div>
-                <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)">‹</button>
-                <button class="carousel-nav carousel-next" onclick="changeSlide(1)">›</button>
+                <button class="carousel-nav carousel-prev">‹</button>
+                <button class="carousel-nav carousel-next">›</button>
                 <div class="carousel-indicators" id="indicators"></div>
             </div>
         </div>
@@ -502,175 +617,137 @@
     </footer>
 
     <script>
-        class Carousel {
-            constructor() {
-                this.currentSlide = 0;
-                this.totalSlides = 7;
-                this.carousel = document.getElementById('carousel');
-                this.indicatorsContainer = document.getElementById('indicators');
-                this.autoSlideInterval = null;
-                this.isTransitioning = false;
-                
-                this.init();
-            }
+        // Simple fade carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const totalSlides = slides.length;
+        let autoSlideInterval;
 
-            init() {
-                this.createIndicators();
-                this.bindEvents();
-                this.updateCarousel();
-                this.startAutoSlide();
-            }
+        // Create indicators
+        const indicatorsContainer = document.getElementById('indicators');
+        for (let i = 0; i < totalSlides; i++) {
+            const indicator = document.createElement('button');
+            indicator.className = 'indicator';
+            if (i === 0) indicator.classList.add('active');
+            indicator.addEventListener('click', () => goToSlide(i));
+            indicatorsContainer.appendChild(indicator);
+        }
 
-            createIndicators() {
-                for (let i = 0; i < this.totalSlides; i++) {
-                    const indicator = document.createElement('button');
-                    indicator.className = 'indicator';
-                    indicator.setAttribute('data-slide', i);
-                    if (i === 0) indicator.classList.add('active');
-                    this.indicatorsContainer.appendChild(indicator);
+        function showSlide(index) {
+            // Remove active class from all slides and indicators
+            slides.forEach(slide => slide.classList.remove('active'));
+            document.querySelectorAll('.indicator').forEach(indicator => indicator.classList.remove('active'));
+            
+            // Add active class to current slide and indicator
+            slides[index].classList.add('active');
+            document.querySelectorAll('.indicator')[index].classList.add('active');
+            
+            // Handle video
+            const video = slides[index].querySelector('video');
+            if (video) {
+                video.currentTime = 0;
+                video.play().catch(() => console.log('Video autoplay blocked'));
+            }
+            
+            // Pause other videos
+            slides.forEach((slide, i) => {
+                if (i !== index) {
+                    const otherVideo = slide.querySelector('video');
+                    if (otherVideo) otherVideo.pause();
                 }
-            }
+            });
+        }
 
-            updateCarousel() {
-                if (this.isTransitioning) return;
-                
-                this.isTransitioning = true;
-                
-                // Update transform
-                this.carousel.style.transform = `translateX(-${this.currentSlide * 100}%)`;
-                
-                // Update indicators
-                document.querySelectorAll('.indicator').forEach((indicator, index) => {
-                    indicator.classList.toggle('active', index === this.currentSlide);
-                });
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
 
-                // Handle video
-                this.handleVideo();
-                
-                // Reset transition flag after animation
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 500);
-            }
+        function prevSlide() {
+            currentSlide = currentSlide === 0 ? totalSlides - 1 : currentSlide - 1;
+            showSlide(currentSlide);
+        }
 
-            handleVideo() {
-                const video = this.carousel.querySelector('video');
-                if (video) {
-                    if (this.currentSlide === 0) {
-                        video.currentTime = 0;
-                        video.muted = false;
-                        video.play().catch(() => {
-                            video.muted = true;
-                            video.play().catch(() => console.log('Video autoplay blocked'));
-                        });
-                    } else {
-                        video.pause();
-                    }
-                }
-            }
+        function goToSlide(index) {
+            currentSlide = index;
+            showSlide(currentSlide);
+            resetAutoSlide();
+        }
 
-            nextSlide() {
-                if (this.isTransitioning) return;
-                this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-                this.updateCarousel();
-            }
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(nextSlide, 4000);
+        }
 
-            prevSlide() {
-                if (this.isTransitioning) return;
-                this.currentSlide = this.currentSlide === 0 ? this.totalSlides - 1 : this.currentSlide - 1;
-                this.updateCarousel();
-            }
-
-            goToSlide(index) {
-                if (this.isTransitioning || index < 0 || index >= this.totalSlides) return;
-                this.currentSlide = index;
-                this.updateCarousel();
-            }
-
-            startAutoSlide() {
-                this.stopAutoSlide();
-                this.autoSlideInterval = setInterval(() => {
-                    this.nextSlide();
-                }, 5000);
-            }
-
-            stopAutoSlide() {
-                if (this.autoSlideInterval) {
-                    clearInterval(this.autoSlideInterval);
-                    this.autoSlideInterval = null;
-                }
-            }
-
-            bindEvents() {
-                // Navigation buttons
-                document.querySelector('.carousel-prev').addEventListener('click', () => {
-                    this.prevSlide();
-                    this.stopAutoSlide();
-                    setTimeout(() => this.startAutoSlide(), 8000);
-                });
-
-                document.querySelector('.carousel-next').addEventListener('click', () => {
-                    this.nextSlide();
-                    this.stopAutoSlide();
-                    setTimeout(() => this.startAutoSlide(), 8000);
-                });
-
-                // Indicators
-                this.indicatorsContainer.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('indicator')) {
-                        const slideIndex = parseInt(e.target.getAttribute('data-slide'));
-                        this.goToSlide(slideIndex);
-                        this.stopAutoSlide();
-                        setTimeout(() => this.startAutoSlide(), 8000);
-                    }
-                });
-
-                // Touch events
-                let touchStartX = 0;
-                let touchEndX = 0;
-
-                this.carousel.addEventListener('touchstart', (e) => {
-                    touchStartX = e.changedTouches[0].screenX;
-                    this.stopAutoSlide();
-                });
-
-                this.carousel.addEventListener('touchend', (e) => {
-                    touchEndX = e.changedTouches[0].screenX;
-                    const swipeThreshold = 50;
-                    
-                    if (touchEndX < touchStartX - swipeThreshold) {
-                        this.nextSlide();
-                    } else if (touchEndX > touchStartX + swipeThreshold) {
-                        this.prevSlide();
-                    }
-                    
-                    setTimeout(() => this.startAutoSlide(), 8000);
-                });
-
-                // Pause when page is hidden
-                document.addEventListener('visibilitychange', () => {
-                    if (document.hidden) {
-                        this.stopAutoSlide();
-                    } else {
-                        this.startAutoSlide();
-                    }
-                });
+        function stopAutoSlide() {
+            if (autoSlideInterval) {
+                clearInterval(autoSlideInterval);
+                autoSlideInterval = null;
             }
         }
 
-        // Initialize carousel when DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            new Carousel();
+        function resetAutoSlide() {
+            stopAutoSlide();
+            setTimeout(startAutoSlide, 6000);
+        }
+
+        // Event listeners
+        document.querySelector('.carousel-prev').addEventListener('click', () => {
+            prevSlide();
+            resetAutoSlide();
         });
 
-        // Fallback for if DOMContentLoaded already fired
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', () => {
-                new Carousel();
-            });
-        } else {
-            new Carousel();
+        document.querySelector('.carousel-next').addEventListener('click', () => {
+            nextSlide();
+            resetAutoSlide();
+        });
+
+        // Touch support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.querySelector('.carousel-wrapper').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+            stopAutoSlide();
+        });
+
+        document.querySelector('.carousel-wrapper').addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const swipeThreshold = 50;
+            
+            if (touchEndX < touchStartX - swipeThreshold) {
+                nextSlide();
+            } else if (touchEndX > touchStartX + swipeThreshold) {
+                prevSlide();
+            }
+            
+            resetAutoSlide();
+        });
+
+        // Create floating pixels
+        function createFloatingPixels() {
+            const container = document.getElementById('floatingPixels');
+            for (let i = 0; i < 15; i++) {
+                const pixel = document.createElement('div');
+                pixel.className = 'pixel';
+                pixel.style.left = Math.random() * 100 + '%';
+                pixel.style.animationDelay = Math.random() * 8 + 's';
+                pixel.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                container.appendChild(pixel);
+            }
         }
+
+        // Initialize
+        startAutoSlide();
+        createFloatingPixels();
+
+        // Pause when page is hidden
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopAutoSlide();
+            } else {
+                startAutoSlide();
+            }
+        });
     </script>
 </body>
 </html>
